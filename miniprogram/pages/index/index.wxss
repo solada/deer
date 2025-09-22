@@ -1,0 +1,106 @@
+/* pages/index/index.wxss */
+
+.top-tips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #ffffff;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.post-list {
+  margin-bottom: 100rpx;
+}
+
+.post-item {
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.author-details {
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-weight: 500;
+}
+
+.post-time {
+  margin-top: 4rpx;
+}
+
+.post-actions {
+  margin-left: 20rpx;
+}
+
+.delete-btn {
+  padding: 8rpx 16rpx;
+  border-radius: 4rpx;
+  background-color: #fff5f5;
+}
+
+.post-content {
+  margin-bottom: 20rpx;
+}
+
+.post-title {
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.post-preview {
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 20rpx;
+}
+
+.post-stats {
+  display: flex;
+  align-items: center;
+}
+
+.load-more {
+  text-align: center;
+  padding: 40rpx 20rpx;
+}
+
+/* 点击效果 */
+.post-item {
+  transition: all 0.2s ease;
+}
+
+.post-item:active {
+  transform: scale(0.98);
+  background-color: #f8f8f8;
+}

@@ -1,0 +1,81 @@
+<!-- pages/profile/profile.wxml -->
+<view class="container">
+  <!-- 已登录状态 -->
+  <view class="profile-content" wx:if="{{isLoggedIn}}">
+    <!-- 用户信息卡片 -->
+    <view class="user-info card">
+      <view class="user-header">
+        <view class="avatar-large">
+          {{userInfo.nickname ? userInfo.nickname.charAt(0) : userInfo.username.charAt(0)}}
+        </view>
+        <view class="user-details">
+          <text class="user-name text-xl">{{userInfo.nickname || userInfo.username}}</text>
+          <text class="user-email text-sm text-muted">{{userInfo.email}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能菜单 -->
+    <view class="menu-section">
+      <view class="menu-item card" bindtap="goToMyPosts">
+        <view class="menu-content">
+          <text class="menu-icon">📝</text>
+          <text class="menu-title text-base">我的帖子</text>
+        </view>
+        <text class="menu-arrow">></text>
+      </view>
+
+      <view class="menu-item card" bindtap="refreshData">
+        <view class="menu-content">
+          <text class="menu-icon">🔄</text>
+          <text class="menu-title text-base">刷新数据</text>
+        </view>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+
+    <!-- 应用信息 -->
+    <view class="app-info card">
+      <view class="info-title text-base">应用信息</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label text-sm text-muted">应用名称</text>
+          <text class="info-value text-sm">鹿鹿论坛</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label text-sm text-muted">版本号</text>
+          <text class="info-value text-sm">1.0.0</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label text-sm text-muted">服务器</text>
+          <text class="info-value text-sm">deerlulu1008.cn</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 退出登录 -->
+    <view class="logout-section">
+      <button class="btn btn-danger" bindtap="logout">
+        退出登录
+      </button>
+    </view>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="login-prompt" wx:if="{{!isLoggedIn}}">
+    <view class="empty">
+      <view class="empty-icon">👤</view>
+      <text class="text-lg">未登录</text>
+      <text class="text-sm text-muted mt-10">登录后可查看个人信息</text>
+      
+      <view class="login-actions">
+        <view class="btn btn-primary" bindtap="goToLogin">
+          登录
+        </view>
+        <view class="btn btn-secondary mt-20" bindtap="goToRegister">
+          注册账号
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

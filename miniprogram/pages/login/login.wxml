@@ -1,0 +1,57 @@
+<!-- pages/login/login.wxml -->
+<view class="container">
+  <view class="login-form">
+    <view class="form-header">
+      <text class="form-title">登录账号</text>
+      <text class="form-subtitle">欢迎回到鹿鹿论坛</text>
+    </view>
+
+    <view class="form-body">
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请输入用户名或邮箱" 
+          value="{{username}}" 
+          bindinput="onUsernameInput"
+          maxlength="50"
+        />
+      </view>
+
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请输入密码" 
+          password="{{!showPassword}}"
+          value="{{password}}" 
+          bindinput="onPasswordInput"
+          maxlength="50"
+        />
+        <view class="password-toggle" bindtap="togglePassword">
+          <text class="text-sm text-muted">{{showPassword ? '隐藏' : '显示'}}</text>
+        </view>
+      </view>
+
+      <button 
+        class="btn {{canSubmit ? 'btn-primary' : 'btn-disabled'}}" 
+        disabled="{{!canSubmit || loading}}"
+        bindtap="handleLogin"
+      >
+        {{loading ? '登录中...' : '登录'}}
+      </button>
+    </view>
+
+    <view class="form-footer">
+      <text class="text-sm text-muted">还没有账号？</text>
+      <text class="text-sm text-primary ml-10" bindtap="goToRegister">立即注册</text>
+    </view>
+  </view>
+
+  <!-- 快速登录提示 -->
+  <view class="quick-login-tips">
+    <view class="tips-title text-sm text-muted">测试账号</view>
+    <view class="tips-content">
+      <text class="text-xs text-muted">用户名: admin</text>
+      <text class="text-xs text-muted ml-20">密码: password123</text>
+    </view>
+  </view>
+</view>

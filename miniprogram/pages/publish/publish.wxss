@@ -1,0 +1,150 @@
+/* pages/publish/publish.wxss */
+
+.container {
+  padding-bottom: 100rpx;
+}
+
+.login-required {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.publish-form {
+  margin-top: 20rpx;
+}
+
+.form-section {
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.form-header {
+  margin-bottom: 40rpx;
+  text-align: center;
+}
+
+.section-title {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.section-subtitle {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.form-label text:first-child {
+  font-weight: 500;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 24rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  line-height: 1.6;
+  background-color: #f8f8f8;
+}
+
+.textarea:focus {
+  border-color: #1AAD19;
+  background-color: #ffffff;
+}
+
+.input-counter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12rpx;
+}
+
+/* 预览样式 */
+.preview-section {
+  margin-bottom: 40rpx;
+}
+
+.preview-card {
+  border: 2rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  background-color: #f8f8f8;
+}
+
+.preview-header {
+  margin-bottom: 20rpx;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+}
+
+.author-details {
+  margin-left: 16rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-weight: 500;
+  margin-bottom: 4rpx;
+}
+
+.preview-content {
+  line-height: 1.6;
+}
+
+.preview-title {
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  display: block;
+  line-height: 1.4;
+}
+
+.preview-body {
+  color: #333333;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 按钮样式 */
+.form-actions {
+  margin-top: 60rpx;
+}
+
+/* 发帖提示 */
+.publish-tips {
+  padding: 30rpx;
+  background-color: #f0f8ff;
+  border: 2rpx solid #e6f3ff;
+}
+
+.tips-title {
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  color: #1AAD19;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.tip-item {
+  margin-bottom: 12rpx;
+  line-height: 1.5;
+}

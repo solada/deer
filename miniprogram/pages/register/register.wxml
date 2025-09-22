@@ -1,0 +1,85 @@
+<!-- pages/register/register.wxml -->
+<view class="container">
+  <view class="register-form">
+    <view class="form-header">
+      <text class="form-title">注册账号</text>
+      <text class="form-subtitle">加入鹿鹿论坛大家庭</text>
+    </view>
+
+    <view class="form-body">
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请输入用户名" 
+          value="{{username}}" 
+          bindinput="onUsernameInput"
+          maxlength="20"
+        />
+        <text class="input-tip text-xs text-muted">3-20个字符，支持字母、数字、下划线</text>
+      </view>
+
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请输入邮箱" 
+          value="{{email}}" 
+          bindinput="onEmailInput"
+          maxlength="50"
+        />
+      </view>
+
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请输入昵称" 
+          value="{{nickname}}" 
+          bindinput="onNicknameInput"
+          maxlength="20"
+        />
+        <text class="input-tip text-xs text-muted">可选，默认使用用户名</text>
+      </view>
+
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请输入密码" 
+          password="{{!showPassword}}"
+          value="{{password}}" 
+          bindinput="onPasswordInput"
+          maxlength="50"
+        />
+        <view class="password-toggle" bindtap="togglePassword">
+          <text class="text-sm text-muted">{{showPassword ? '隐藏' : '显示'}}</text>
+        </view>
+        <text class="input-tip text-xs text-muted">至少6个字符</text>
+      </view>
+
+      <view class="form-group">
+        <input 
+          class="input" 
+          placeholder="请再次输入密码" 
+          password="{{!showConfirmPassword}}"
+          value="{{confirmPassword}}" 
+          bindinput="onConfirmPasswordInput"
+          maxlength="50"
+        />
+        <view class="password-toggle" bindtap="toggleConfirmPassword">
+          <text class="text-sm text-muted">{{showConfirmPassword ? '隐藏' : '显示'}}</text>
+        </view>
+      </view>
+
+      <button 
+        class="btn {{canSubmit ? 'btn-primary' : 'btn-disabled'}}" 
+        disabled="{{!canSubmit || loading}}"
+        bindtap="handleRegister"
+      >
+        {{loading ? '注册中...' : '注册账号'}}
+      </button>
+    </view>
+
+    <view class="form-footer">
+      <text class="text-sm text-muted">已有账号？</text>
+      <text class="text-sm text-primary ml-10" bindtap="goToLogin">立即登录</text>
+    </view>
+  </view>
+</view>

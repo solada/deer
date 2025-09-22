@@ -1,0 +1,106 @@
+<!-- pages/post-detail/post-detail.wxml -->
+<view class="container">
+  <!-- 帖子内容 -->
+  <view class="post-detail card" wx:if="{{post}}">
+    <view class="post-header">
+      <view class="author-info">
+        <view class="avatar">
+          {{post.nickname ? post.nickname.charAt(0) : post.username.charAt(0)}}
+        </view>
+        <view class="author-details">
+          <text class="author-name text-base">{{post.nickname || post.username}}</text>
+          <text class="post-time text-xs text-muted">{{post.formatted_time}}</text>
+        </view>
+      </view>
+      
+      <!-- 删除按钮 - 只有作者可见 -->
+      <view class="post-actions" wx:if="{{isLoggedIn && userInfo.id === post.user_id}}">
+        <text class="delete-btn text-danger text-sm" bindtap="deletePost">删除</text>
+      </view>
+    </view>
+    
+    <view class="post-content">
+      <text class="post-title text-xl">{{post.title}}</text>
+      <text class="post-body text-base">{{post.content}}</text>
+    </view>
+  </view>
+
+  <!-- 评论区 -->
+  <view class="comments-section">
+    <view class="section-header">
+      <text class="section-title text-lg">评论 ({{comments.length}})</text>
+    </view>
+
+    <!-- 发表评论 -->
+    <view class="comment-form card" wx:if="{{isLoggedIn}}">
+      <textarea 
+        class="comment-input" 
+        placeholder="{{replyTo ? '回复 @' + replyTo.nickname + '：' : '写下你的评论...'}}"
+        value="{{commentContent}}" 
+        bindinput="onCommentInput"
+        maxlength="1000"
+        auto-height
+      />
+      <view class="comment-actions">
+        <view class="comment-info">
+          <text class="text-xs text-muted">{{commentContent.length}}/1000</text>
+          <text class="text-xs text-primary ml-20" wx:if="{{replyTo}}" bindtap="cancelReply">取消回复</text>
+        </view>
+        <button 
+          class="btn-comment {{commentContent.trim().length > 0 ? 'active' : ''}}" 
+          disabled="{{commentContent.trim().length === 0 || commenting}}"
+          bindtap="submitComment"
+        >
+          {{commenting ? '发布中...' : '发布'}}
+        </button>
+      </view>
+    </view>
+
+    <!-- 未登录提示 -->
+    <view class="login-tip card" wx:if="{{!isLoggedIn}}">
+      <text class="text-sm text-muted">请先登录以参与讨论</text>
+      <text class="text-sm text-primary ml-20" bindtap="goToLogin">去登录</text>
+    </view>
+
+    <!-- 评论列表 -->
+    <view class="comments-list">
+      <view class="comment-item card" wx:for="{{comments}}" wx:key="id">
+        <view class="comment-header">
+          <view class="commenter-info">
+            <view class="avatar avatar-sm">
+              {{item.nickname ? item.nickname.charAt(0) : item.username.charAt(0)}}
+            </view>
+            <view class="commenter-details">
+              <text class="commenter-name text-sm">{{item.nickname || item.username}}</text>
+              <text class="comment-time text-xs text-muted">{{item.formatted_time}}</text>
+            </view>
+          </view>
+          
+          <view class="comment-actions">
+            <text class="reply-btn text-xs text-primary" bindtap="replyToComment" data-comment="{{item}}">回复</text>
+          </view>
+        </view>
+        
+        <view class="comment-content">
+          <!-- 如果是回复评论，显示被回复的用户 -->
+          <view class="reply-to" wx:if="{{item.reply_to_nickname}}">
+            <text class="text-sm text-primary">@{{item.reply_to_nickname}}</text>
+          </view>
+          <text class="comment-text text-sm">{{item.content}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{comments.length === 0 && !loading}}">
+      <view class="empty-icon">💬</view>
+      <text class="text-base">还没有评论</text>
+      <text class="text-sm text-muted mt-10">成为第一个评论的人吧！</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text class="text-sm text-muted">加载中...</text>
+  </view>
+</view>

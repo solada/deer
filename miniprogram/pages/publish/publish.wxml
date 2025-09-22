@@ -1,0 +1,117 @@
+<!-- pages/publish/publish.wxml -->
+<view class="container">
+  <!-- 未登录提示 -->
+  <view class="login-required" wx:if="{{!isLoggedIn}}">
+    <view class="empty">
+      <view class="empty-icon">🔒</view>
+      <text class="text-lg">请先登录</text>
+      <text class="text-sm text-muted mt-10">登录后即可发布帖子</text>
+      <view class="btn btn-primary mt-30" bindtap="goToLogin">
+        去登录
+      </view>
+    </view>
+  </view>
+
+  <!-- 发帖表单 -->
+  <view class="publish-form" wx:if="{{isLoggedIn}}">
+    <view class="form-section card">
+      <view class="form-header">
+        <text class="section-title text-lg">发布新帖</text>
+        <text class="section-subtitle text-sm text-muted">分享你的想法和见解</text>
+      </view>
+
+      <view class="form-body">
+        <!-- 标题输入 -->
+        <view class="form-group">
+          <view class="form-label">
+            <text class="text-base">标题</text>
+            <text class="text-xs text-danger">*</text>
+          </view>
+          <input 
+            class="input" 
+            placeholder="请输入帖子标题" 
+            value="{{title}}" 
+            bindinput="onTitleInput"
+            maxlength="200"
+          />
+          <view class="input-counter">
+            <text class="text-xs text-muted">{{title.length}}/200</text>
+          </view>
+        </view>
+
+        <!-- 内容输入 -->
+        <view class="form-group">
+          <view class="form-label">
+            <text class="text-base">内容</text>
+            <text class="text-xs text-danger">*</text>
+          </view>
+          <textarea 
+            class="textarea" 
+            placeholder="请输入帖子内容，支持换行..." 
+            value="{{content}}" 
+            bindinput="onContentInput"
+            maxlength="10000"
+            auto-height
+          />
+          <view class="input-counter">
+            <text class="text-xs text-muted">{{content.length}}/10000</text>
+          </view>
+        </view>
+
+        <!-- 预览 -->
+        <view class="preview-section" wx:if="{{title.trim() || content.trim()}}">
+          <view class="form-label">
+            <text class="text-base">预览</text>
+          </view>
+          <view class="preview-card">
+            <view class="preview-header">
+              <view class="author-info">
+                <view class="avatar avatar-sm">
+                  {{userInfo.nickname ? userInfo.nickname.charAt(0) : userInfo.username.charAt(0)}}
+                </view>
+                <view class="author-details">
+                  <text class="author-name text-sm">{{userInfo.nickname || userInfo.username}}</text>
+                  <text class="post-time text-xs text-muted">刚刚</text>
+                </view>
+              </view>
+            </view>
+            <view class="preview-content">
+              <text class="preview-title text-lg" wx:if="{{title.trim()}}">{{title}}</text>
+              <text class="preview-body text-base" wx:if="{{content.trim()}}">{{content}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 发布按钮 -->
+        <view class="form-actions">
+          <button 
+            class="btn {{canPublish ? 'btn-primary' : 'btn-disabled'}}" 
+            disabled="{{!canPublish || publishing}}"
+            bindtap="publishPost"
+          >
+            {{publishing ? '发布中...' : '发布帖子'}}
+          </button>
+          
+          <button 
+            class="btn btn-secondary mt-20" 
+            bindtap="clearForm"
+            wx:if="{{title.trim() || content.trim()}}"
+          >
+            清空内容
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 发帖提示 -->
+    <view class="publish-tips card">
+      <view class="tips-title text-base">发帖须知</view>
+      <view class="tips-list">
+        <text class="tip-item text-sm text-muted">• 请确保内容积极健康，遵守相关法律法规</text>
+        <text class="tip-item text-sm text-muted">• 标题要简洁明了，准确概括帖子内容</text>
+        <text class="tip-item text-sm text-muted">• 发布后可以删除自己的帖子</text>
+        <text class="tip-item text-sm text-muted">• 尊重他人，友善交流</text>
+      </view>
+    </view>
+  </view>
+</view>
