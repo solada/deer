@@ -65,7 +65,13 @@ App({
         data: options.data || {},
         header: header,
         success: (res) => {
-          if (res.statusCode === 200) {
+          console.log('请求响应:', {
+            url: `${app.globalData.baseUrl}${options.url}`,
+            statusCode: res.statusCode,
+            data: res.data
+          })
+          
+          if (res.statusCode === 200 || res.statusCode === 201) {
             resolve(res.data)
           } else if (res.statusCode === 401) {
             // Token 过期，清除登录状态
@@ -81,11 +87,12 @@ App({
             }, 1500)
             reject(res.data)
           } else {
+            const errorMsg = (res.data && res.data.error) || '请求失败'
             wx.showToast({
-              title: res.data.error || '请求失败',
+              title: errorMsg,
               icon: 'none'
             })
-            reject(res.data)
+            reject(res.data || { error: errorMsg })
           }
         },
         fail: (err) => {

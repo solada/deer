@@ -1,21 +1,9 @@
 {
-  "libVersion": "2.19.4",
+  "libVersion": "3.10.2",
   "projectname": "miniprogram",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null,
-          "launchMode": "default"
-        }
-      ]
-    }
-  },
+  "condition": {},
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "coverView": true,
     "lazyloadPlaceholderEnable": false,
     "skylineRenderEnable": false,
@@ -30,6 +18,7 @@
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true,
     "bigPackageSizeSupport": false,
-    "useIsolateContext": true
+    "useIsolateContext": true,
+    "useApiHostProcess": false
   }
 }

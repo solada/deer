@@ -127,16 +127,38 @@ Page({
         requestData.reply_to_user_id = this.data.replyTo.user_id
       }
 
+      console.log('提交评论请求:', requestData)
+
       const res = await app.request({
         url: `/posts/${this.data.postId}/comments`,
         method: 'POST',
         data: requestData
       })
 
+      console.log('评论提交响应:', res)
+
+      // 检查响应结构并处理数据
+      let commentData = res.comment || res.data || res
+      
+      // 确保有必要的字段
+      if (!commentData || !commentData.id) {
+        throw new Error('服务器返回的评论数据格式不正确')
+      }
+
+      // 安全地格式化时间
+      let formattedTime = '刚刚'
+      if (commentData.created_at) {
+        try {
+          formattedTime = app.formatTime(commentData.created_at)
+        } catch (timeError) {
+          console.warn('时间格式化失败:', timeError)
+        }
+      }
+
       // 添加格式化时间
       const newComment = {
-        ...res.comment,
-        formatted_time: app.formatTime(res.comment.created_at)
+        ...commentData,
+        formatted_time: formattedTime
       }
 
       // 将新评论添加到列表末尾
@@ -155,6 +177,12 @@ Page({
     } catch (error) {
       console.error('发表评论失败:', error)
       this.setData({ commenting: false })
+      
+      // 显示具体的错误信息
+      wx.showToast({
+        title: error.message || error.error || '发表评论失败',
+        icon: 'none'
+      })
     }
   },
 
